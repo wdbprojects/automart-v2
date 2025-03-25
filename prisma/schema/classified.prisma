@@ -1,0 +1,89 @@
+model Classified {
+  id             Int              @id @default(autoincrement())
+  views          Int              @default(0)
+  slug           String           @unique
+  vrm            String?
+  title          String?
+  description    String?
+  year           Int?
+  odoReading     Int?             @default(0) @map("odo_reading")
+  doors          Int              @default(2)
+  seats          Int              @default(4)
+  price          Int              @default(0)
+  makeId         Int              @map("make_id")
+  make           Make             @relation(fields: [makeId], references: [id])
+  modelId        Int              @map("model_id")
+  model          Model            @relation(fields: [modelId], references: [id])
+  modelVariantId Int?             @map("model_variant_id")
+  modelVariant   ModelVariant?    @relation(fields: [modelVariantId], references: [id])
+  // ulezCompliance ULEZCompliance   @default(EXEMPT)
+  transmission   Transmission     @default(MANUAL)
+  color          Color            @default(BLACK)
+  fuelType       FuelType         @default(PETROL) @map("fuel_type")
+  bodyType       BodyType         @default(SEDAN) @map("body_type")
+  odoUnit        OdoUnit          @default(KILOMETERS) @map("odo_unit")
+  currency       CurrencyCode     @default(USD)
+  status         ClassifiedStatus @default(DRAFT)
+  images         Image[]
+  customers      Customer[]
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt() @map("updated_at")
+
+  @@index([makeId, modelId], name: "index_make_model")
+  @@index([status], name: "index_status")
+  @@index([price], name: "index_price")
+  @@map("classifieds")
+}
+
+enum Color {
+  BLACK
+  BLUE
+  BROWN
+  GRAY
+  GREEN
+  SILVER
+  WHITE
+  ORANGE
+  PINK
+  PURPLE
+  RED
+  YELLOW
+}
+
+enum ClassifiedStatus {
+  LIVE
+  DRAFT
+  SOLD
+}
+
+enum CurrencyCode {
+  USD
+  EUR
+  BOB
+}
+
+enum OdoUnit {
+  MILES
+  KILOMETERS
+}
+
+enum BodyType {
+  SEDAN
+  HATCHBACK
+  SUV
+  COUPE
+  CONVERTIBLE
+  WAGON
+}
+
+enum FuelType {
+  PETROL
+  DIESEL
+  ELECTRIC
+  HYBRID
+}
+
+enum Transmission {
+  MANUAL
+  AUTOMATIC
+}
