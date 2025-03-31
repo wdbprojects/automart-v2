@@ -4,11 +4,11 @@ import MainSection from "./main-section";
 const InventorySidebar = () => {
   return (
     <Sidebar
-      className="pt-16 z-40 border-none"
+      className="pt-20 z-40 border-none"
       // collapsible="offcanvas"
       variant="floating"
     >
-      <SidebarContent className="bg-muted">
+      <SidebarContent className="">
         <MainSection />
       </SidebarContent>
     </Sidebar>
