@@ -9,6 +9,11 @@
   --font-body: var(--font-body), ui-sans-serif, system-ui, "Apple Color Emoji", "Segoe UI Emoji", Arial;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  /* HACK: Custom breakpoints */
+  --breakpoint-xs: 420px;
+  --breakpoint-mdlg: 920px;
+  --breakpoint-2xl: 100rem;
+  --breakpoint-3xl: 120rem;
 }
 
 :root {
@@ -30,7 +35,7 @@
   --destructive-foreground: oklch(98.38% 0.0035 247.86);
   --border: oklch(92.9% 0.0126 255.53);
   --input: oklch(92.9% 0.0126 255.53);
-  --ring: oklch(54.6% 0.2153 262.87)
+  --ring: oklch(54.6% 0.2153 262.87);
   --chart-1: oklch(67.72% 0.1571 35.19);
   --chart-2: oklch(63.09% 0.1013 183.49);
   --chart-3: oklch(37.87% 0.044 225.54);

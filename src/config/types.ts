@@ -6,7 +6,7 @@ type Params = {
 
 export type PageProps = {
   params?: Promise<Params>;
-  searchParams?: Promise<[x: string | string[] | undefined]>;
+  searchParams?: Promise<{ [x: string]: string | string[] | undefined }>;
 };
 
 export type AwaitedPageProps = {

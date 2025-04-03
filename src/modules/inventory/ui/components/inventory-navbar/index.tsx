@@ -4,10 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import SearchInput from "./search-input";
 import { Button } from "@/components/ui/button";
+import SubNavbar from "./sub-navbar";
 
 const InventoryNavbar = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 h-16 py-2 bg-background flex items-center px-2 pr-5 z-50 justify-between">
+    <nav className="fixed top-0 left-0 right-0 items-center px-2 pr-5 z-50 flex justify-between border-b bg-background h-16 py-2">
       <div className="flex items-center gap-4 w-full">
         {/* //NOTE: MENU & LOGO */}
         <div className="flex items-center gap-2 flex-shrink-0">

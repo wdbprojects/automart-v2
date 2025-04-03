@@ -1,7 +1,7 @@
 import { imagesSources } from "@/config/constants";
 import { faker } from "@faker-js/faker";
 import { Prisma, PrismaClient } from "@prisma/client";
-import { createPngDataUri } from "unlazy/blurhash";
+import { createPngDataUri } from "unlazy/thumbhash";
 
 export async function seedImages(prisma: PrismaClient) {
   const classifieds = await prisma.classified.findMany();
