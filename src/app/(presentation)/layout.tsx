@@ -1,4 +1,4 @@
-import { InventoryLayout } from "@/modules/inventory/ui/layouts/inventory-layout";
+import { InventoryLayout } from "@/modules/inventory/layouts/inventory-layout";
 import type { PropsWithChildren } from "react";
 
 const PresentationLayout = (props: PropsWithChildren) => {

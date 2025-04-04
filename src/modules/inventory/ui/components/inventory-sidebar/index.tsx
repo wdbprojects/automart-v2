@@ -1,7 +1,16 @@
 import { Sidebar, SidebarContent } from "@/components/ui/sidebar";
-import MainSection from "./main-section";
+import FilterSection from "./filter-section";
+import { PageProps } from "@/config/types";
 
-const InventorySidebar = () => {
+interface InventorySidebarProps {
+  minMaxValues: any;
+  searchParams: any;
+}
+
+const InventorySidebar = ({
+  minMaxValues,
+  searchParams,
+}: InventorySidebarProps) => {
   return (
     <Sidebar
       className="pt-18 z-40 border-none rounded-sm"
@@ -9,7 +18,7 @@ const InventorySidebar = () => {
       variant="floating"
     >
       <SidebarContent className="">
-        <MainSection />
+        <FilterSection minMaxValues={null} searchParams={searchParams} />
       </SidebarContent>
     </Sidebar>
   );
