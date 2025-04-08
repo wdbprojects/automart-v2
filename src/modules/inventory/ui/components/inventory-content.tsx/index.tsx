@@ -16,10 +16,14 @@ const InventoryContent = ({
   totalPages,
 }: InventoryContentProps) => {
   return (
-    <div className="mt-1a">
-      <div className="flex items-center justify-between px-4 py-1">
+    <div className="mt-1">
+      <div className="flex flex-col md:flex-row items-center justify-start gap-2 md:justify-between px-4 py-1 h-10 mb-10 md:mb-2">
         <h2 className="text-sm font-semibold text-foreground flex-1">
-          {count} items found
+          {count === 0
+            ? "No items found"
+            : count === 1
+            ? "1 item found"
+            : `${count} items found`}
         </h2>
         <CustomPagination
           baseURL={routes.inventory}

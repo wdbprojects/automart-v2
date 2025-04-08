@@ -1,4 +1,5 @@
-import { Prisma } from "@prisma/client";
+import { CurrencyCode, Prisma } from "@prisma/client";
+import { ChangeEvent } from "react";
 
 type Params = {
   [x: string]: string | string[];
@@ -27,3 +28,24 @@ export enum MultiStepFormEnum {
 export interface Favourites {
   ids: number[];
 }
+
+export interface TaxonomyFiltersProps extends AwaitedPageProps {
+  handleChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+}
+export interface RangeFiltersProps extends TaxonomyFiltersProps {
+  label: string;
+  minName: string;
+  maxName: string;
+  defaultMin: number;
+  defaultMax: number;
+  increment?: number;
+  thousandSeparator?: boolean;
+  currency?: {
+    currencyCode: CurrencyCode;
+  };
+}
+
+export type FilterOptions<LType, VType> = Array<{
+  label: LType;
+  value: VType;
+}>;

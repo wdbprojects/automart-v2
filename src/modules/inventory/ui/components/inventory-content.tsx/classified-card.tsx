@@ -17,50 +17,19 @@ import { HTMLParser } from "@/components/shared/html-parser";
 import { Cog, Fuel, GaugeCircle, Paintbrush2 } from "lucide-react";
 import { Color, FuelType, OdoUnit, Transmission } from "@prisma/client";
 import FavoriteButton from "./favourite-button";
+import {
+  formatColor,
+  formatFuelType,
+  formatNumber,
+  formatOdoUnit,
+  formatPrice,
+  formatTransmission,
+} from "@/lib/utils";
 
 interface ClassifiedCardProps {
   classified: ClassifiedWithImages;
   favourites: number[];
 }
-
-const formatNumber = (
-  num: number | null,
-  options?: Intl.NumberFormatOptions,
-) => {
-  if (!num) return "0";
-  return new Intl.NumberFormat("en-US", options).format(num);
-};
-
-const formatOdoUnit = (unit: OdoUnit) => {
-  if (!unit) return "";
-  return unit === OdoUnit.MILES ? "km" : "mi";
-};
-
-const formatTransmission = (transmission: Transmission) => {
-  if (!transmission) return "";
-  return transmission === Transmission.MANUAL ? "Manual" : "Automatic";
-};
-
-const formatFuelType = (fuelType: FuelType) => {
-  if (!fuelType) return "";
-  return FuelType.HYBRID
-    ? "Hybrid"
-    : FuelType.DIESEL
-    ? "Diesel"
-    : FuelType.ELECTRIC
-    ? "Electric"
-    : "Petrol";
-};
-
-const availableColors = ["red", "blue", "yellow"];
-const formatColor = (color: Color) => {
-  if (!color) return "Unknown";
-  return color
-    .toLowerCase()
-    .split("")
-    .toSpliced(0, 1, color[0].toUpperCase())
-    .join("");
-};
 
 const getKeyClassifiedInfo = (classified: ClassifiedWithImages) => {
   return [
@@ -128,7 +97,12 @@ export const ClassifiedCard = (props: ClassifiedCardProps) => {
               </Link>
 
               <div className="absolute top-2.5 right-3.5 bg-background text-foreground px-2 py-1 rounded">
-                <p className="text-xs lg:text-sm font-semibold">97.446</p>
+                <p className="text-xs lg:text-sm font-semibold">
+                  {formatPrice({
+                    price: classified.price,
+                    currency: classified.currency,
+                  })}
+                </p>
               </div>
               <FavoriteButton
                 setIsFavourite={setIsFavourite}

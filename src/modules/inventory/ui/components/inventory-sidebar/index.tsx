@@ -1,10 +1,18 @@
-import { Sidebar, SidebarContent } from "@/components/ui/sidebar";
-import FilterSection from "./filter-section";
-import { PageProps } from "@/config/types";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarSeparator,
+} from "@/components/ui/sidebar";
+import HeaderSection from "@/modules/inventory/ui/components/inventory-sidebar/header-section";
+import FilterSection from "@/modules/inventory/ui/components/inventory-sidebar/filter-section";
+import { Prisma } from "@prisma/client";
 
 interface InventorySidebarProps {
-  minMaxValues: any;
-  searchParams: any;
+  minMaxValues: Prisma.GetClassifiedAggregateType<{
+    _min: { year: true; price: true; odoReading: true };
+    _max: { year: true; price: true; odoReading: true };
+  }>;
+  searchParams: { [x: string]: string | string[] | undefined };
 }
 
 const InventorySidebar = ({
@@ -17,8 +25,13 @@ const InventorySidebar = ({
       // collapsible="offcanvas"
       variant="floating"
     >
-      <SidebarContent className="">
-        <FilterSection minMaxValues={null} searchParams={searchParams} />
+      <SidebarContent className="py-0 pb-16">
+        <HeaderSection minMaxValues={null} searchParams={searchParams} />
+        <SidebarSeparator className="!my-0 !py-0 h-auto" />
+        <FilterSection
+          minMaxValues={minMaxValues}
+          searchParams={searchParams}
+        />
       </SidebarContent>
     </Sidebar>
   );
