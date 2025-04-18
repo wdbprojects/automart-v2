@@ -24,6 +24,12 @@
       "@/env": ["./env.mjs"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/modules/inventory/ui/components/inventory-content"
+  ],
   "exclude": ["node_modules"]
 }

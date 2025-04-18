@@ -1,5 +1,4 @@
 import { ClassifiedWithImages, Favourites } from "@/config/types.js";
-import InventoryContent from "./components/inventory-content.tsx";
 import InventoryNavbar from "./components/inventory-navbar";
 import InventorySidebar from "./components/inventory-sidebar";
 import { CLASSIFIEDS_PER_PAGE } from "@/config/constants";
@@ -8,6 +7,7 @@ import { z } from "zod";
 import { getSourceId } from "@/lib/source-id";
 import { redis } from "@/lib/redis-store";
 import { Prisma } from "@prisma/client";
+import InventoryContent from "./components/inventory-content";
 
 const InventoryMain = async ({
   searchParams,
@@ -19,7 +19,7 @@ const InventoryMain = async ({
   classifieds: ClassifiedWithImages[];
   count: number;
   minMaxValues: Prisma.GetClassifiedAggregateType<{
-    _min: { year: true };
+    _min: { year: true; price: true; odoReading: true };
     _max: { year: true; price: true; odoReading: true };
   }>;
 }) => {

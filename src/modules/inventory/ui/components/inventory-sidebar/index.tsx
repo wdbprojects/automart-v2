@@ -1,11 +1,13 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 import HeaderSection from "@/modules/inventory/ui/components/inventory-sidebar/header-section";
 import FilterSection from "@/modules/inventory/ui/components/inventory-sidebar/filter-section";
 import { Prisma } from "@prisma/client";
+import { NewsletterForm } from "@/components/shared/newsletter-form";
 
 interface InventorySidebarProps {
   minMaxValues: Prisma.GetClassifiedAggregateType<{
@@ -33,6 +35,14 @@ const InventorySidebar = ({
           searchParams={searchParams}
         />
       </SidebarContent>
+      <SidebarFooter className="bg-background p-4">
+        <div className="flex justify-center w-full">
+          <NewsletterForm />
+        </div>
+        <div className="px-0 py-2 bg-secondary text-sm rounded-xs text-center">
+          AutoMart &copy; 2025
+        </div>
+      </SidebarFooter>
     </Sidebar>
   );
 };
