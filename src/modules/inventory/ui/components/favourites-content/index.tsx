@@ -1,24 +1,25 @@
-import { ClassifiedsList } from "./classifieds-list";
 import CustomPagination from "@/components/shared/custom-pagination";
-import SkeletonList from "@/components/shared/skeleton-list";
+import { ClassifiedsList } from "../inventory-content/classifieds-list";
 import { routes } from "@/config/routes";
-import { Suspense } from "react";
 
-interface InventoryContentProps {
+interface FavouritesContentProps {
   classifieds: any;
   favourites: any;
   count: any;
   totalPages: number;
 }
 
-const InventoryContent = ({
+const FavouritesContent = ({
   classifieds,
   favourites,
   count,
   totalPages,
-}: InventoryContentProps) => {
+}: FavouritesContentProps) => {
   return (
     <div className="mt-1">
+      <h2 className="text-lg font-semibold text-foreground flex-1 text-left mb-0 ml-4">
+        Your Favourite Classifieds
+      </h2>
       <div className="flex flex-col md:flex-row items-center justify-start gap-2 md:justify-between px-4 py-1 h-10 mb-10 md:mb-2">
         <h2 className="text-sm font-semibold text-foreground flex-1">
           {count === 0
@@ -28,7 +29,7 @@ const InventoryContent = ({
             : `${count} items found`}
         </h2>
         <CustomPagination
-          baseURL={routes.inventory}
+          baseURL={routes.favourites}
           totalPages={totalPages}
           styles={{
             paginationRoot: "justify-end",
@@ -39,13 +40,13 @@ const InventoryContent = ({
           }}
         />
       </div>
-      <Suspense fallback={<div className="ml-4">{<SkeletonList />}</div>}>
-        <ClassifiedsList
-          classifieds={classifieds}
-          favourites={favourites ? favourites.ids : []}
-        />
-      </Suspense>
+
+      <ClassifiedsList
+        classifieds={classifieds}
+        favourites={favourites ? favourites.ids : []}
+      />
     </div>
   );
 };
-export default InventoryContent;
+
+export default FavouritesContent;

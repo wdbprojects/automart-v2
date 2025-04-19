@@ -8,8 +8,9 @@ import { getSourceId } from "@/lib/source-id";
 import { redis } from "@/lib/redis-store";
 import { Prisma } from "@prisma/client";
 import InventoryContent from "./components/inventory-content";
+import FavouritesContent from "./components/favourites-content";
 
-const InventoryMain = async ({
+const FavouritesMain = async ({
   searchParams,
   classifieds,
   count,
@@ -31,12 +32,13 @@ const InventoryMain = async ({
     <div className="w-full">
       <InventoryNavbar />
       <div className="flex min-h-screen pt-[4rem]">
-        <InventorySidebar
+        {/* <InventorySidebar
           minMaxValues={minMaxValues}
           searchParams={searchParams}
-        />
+        /> */}
+
         <main className="flex-1 overflow-auto">
-          <InventoryContent
+          <FavouritesContent
             favourites={favourites}
             classifieds={classifieds}
             count={count}
@@ -47,4 +49,4 @@ const InventoryMain = async ({
     </div>
   );
 };
-export default InventoryMain;
+export default FavouritesMain;

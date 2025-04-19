@@ -135,7 +135,6 @@ const InventoryNavbar = async () => {
                   </Link>
                 ))}
               </nav>
-
               <SheetFooter>
                 <SheetClose asChild>
                   <SheetDescription>

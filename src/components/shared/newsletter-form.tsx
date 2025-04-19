@@ -1,6 +1,12 @@
 "use client";
 
-import { startTransition, useActionState, useEffect, useState } from "react";
+import {
+  startTransition,
+  useActionState,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useFormStatus } from "react-dom";
 import { subscribeAction } from "@/app/_actions/subscribe";
 import { useForm } from "react-hook-form";
@@ -69,12 +75,13 @@ export const NewsletterForm = () => {
     setOpenDialog(false);
   };
 
+  const formRef = useRef<HTMLFormElement>(null);
+
   useEffect(() => {
     if (state.success) {
       toast.success(state.message);
-    } else if (!state.success) {
-      toast.error(state.message);
     }
+    // TODO: add toast when user already subscribed
     reset();
   }, [state.success]);
 
@@ -97,6 +104,7 @@ export const NewsletterForm = () => {
         </DialogHeader>
         <Form {...form}>
           <form
+            ref={formRef}
             className="space-y-3"
             action={handleFormAction}
             onSubmit={() => null}

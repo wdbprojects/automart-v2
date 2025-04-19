@@ -1,46 +1,47 @@
 import { PageSchema } from "@/app/schemas/page.schema";
 import { CLASSIFIEDS_PER_PAGE } from "@/config/constants";
-import { AwaitedPageProps, PageProps } from "@/config/types";
+import { Favourites, PageProps } from "@/config/types";
 import { prisma } from "@/lib/prisma";
-import { buildClassifiedFilterQuery } from "@/lib/utils";
-import InventoryMain from "@/modules/inventory/ui/inventory-main";
-import { ClassifiedStatus, Prisma } from "@prisma/client";
-import { z } from "zod";
+import { redis } from "@/lib/redis-store";
+import { getSourceId } from "@/lib/source-id";
+import FavouritesMain from "@/modules/inventory/ui/favourites-main";
+import { ClassifiedStatus } from "@prisma/client";
 
-/* //FUNC: fetch classifieds based on filters  */
-
-const getInventory = async (searchParams: AwaitedPageProps["searchParams"]) => {
+export default async function FavouritesPage(props: PageProps) {
+  const searchParams = await props.searchParams;
   const validPage = PageSchema.parse(searchParams?.page);
-  // NOTE: get the current page
   const page = validPage ? validPage : 1;
-  // NOTE: calculate the offset
   const offset = (page - 1) * CLASSIFIEDS_PER_PAGE;
-  return prisma.classified.findMany({
-    where: buildClassifiedFilterQuery(searchParams),
+
+  const sourceId = await getSourceId();
+  const favourites = await redis.get<Favourites>(sourceId ?? "");
+
+  const classifieds = prisma.classified.findMany({
+    where: { id: { in: favourites ? favourites.ids : [] } },
     include: { images: { take: 1 } },
     skip: offset,
     take: CLASSIFIEDS_PER_PAGE,
   });
-};
 
-const InventoryPage = async (props: PageProps) => {
-  const searchParams = await props.searchParams;
-  const classifieds = getInventory(searchParams);
+  // const classifieds = await getInventory(searchParams);
   const count = await prisma.classified.count({
-    where: buildClassifiedFilterQuery(searchParams),
+    where: { id: { in: favourites ? favourites.ids : [] } },
   });
+
+  const totalPages = Math.ceil(count / CLASSIFIEDS_PER_PAGE);
+
   const minMaxResult = await prisma.classified.aggregate({
     where: { status: ClassifiedStatus.LIVE },
     _min: { year: true, price: true, odoReading: true },
     _max: { year: true, price: true, odoReading: true },
   });
+
   return (
-    <InventoryMain
+    <FavouritesMain
       searchParams={searchParams ?? {}}
       classifieds={classifieds}
       count={count}
       minMaxValues={minMaxResult}
     />
   );
-};
-export default InventoryPage;
+}
