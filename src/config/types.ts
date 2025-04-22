@@ -49,3 +49,7 @@ export type FilterOptions<LType, VType> = Array<{
   label: LType;
   value: VType;
 }>;
+
+export type ClassifiedWithImagesAndMake = Prisma.ClassifiedGetPayload<{
+  include: { images: true; make: true };
+}>;

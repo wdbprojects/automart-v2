@@ -279,14 +279,14 @@ function SidebarTrigger({
             data-slot="sidebar-trigger"
             variant="outline"
             size="icon"
-            className={cn("h-9 w-9", className)}
+            className={cn(" !p-0", className)}
             onClick={(event) => {
               onClick?.(event);
               toggleSidebar();
             }}
             {...props}
           >
-            <Settings2 strokeWidth={1.3} className="!w-6 !h-6" />
+            <Settings2 className="!w-6 !h-6" strokeWidth={1.3} />
             <span className="sr-only">Toggle Sidebar</span>
           </Button>
         </TooltipTrigger>

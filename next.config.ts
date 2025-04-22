@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "car-dealer-website.s3.eu-west-1.amazonaws.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "vl.imgix.net",
+        port: "",
+      },
     ],
   },
 };
