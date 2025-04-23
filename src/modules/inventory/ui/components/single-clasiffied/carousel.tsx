@@ -127,7 +127,6 @@ const ClassifiedCarousel = ({ images }: ClassifiedCarouselProps) => {
                 height={200}
                 placeholder="blur"
                 blurDataURL={image.blurhash}
-                onClick={handleImageClick}
               />
             </SwiperSlide>
           );
