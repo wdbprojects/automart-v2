@@ -1,5 +1,5 @@
 const ClassifiedSkeletonPage = () => {
-  return <div>Loading...</div>;
+  return <></>;
 };
 
 export default ClassifiedSkeletonPage;

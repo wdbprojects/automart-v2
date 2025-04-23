@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.9",
+    "@types/fslightbox-react": "^1.8.0",
     "@types/node": "^22.13.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",

@@ -3,16 +3,69 @@ import ClassifiedCarousel from "./carousel";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import {
+  formatBodyType,
   formatColor,
   formatFuelType,
   formatNumber,
   formatOdoUnit,
   formatPrice,
+  formatTransmission,
 } from "@/lib/utils";
 import { HTMLParser } from "@/components/shared/html-parser";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { routes } from "@/config/routes";
+import {
+  Car,
+  CarFront,
+  Fingerprint,
+  Fuel,
+  Gauge,
+  Power,
+  User,
+} from "lucide-react";
+
+const features = (props: ClassifiedWithImagesAndMake) => {
+  return [
+    {
+      id: 1,
+      icon: <Fingerprint className="w-6 h-6 mx-auto text-muted" />,
+      label: props.vrm,
+    },
+    {
+      id: 2,
+      icon: <Car className="w-6 h-6 mx-auto text-muted" />,
+      label: formatBodyType(props.bodyType),
+    },
+    {
+      id: 3,
+      icon: <Fuel className="w-6 h-6 mx-auto text-muted" />,
+      label: formatFuelType(props.fuelType),
+    },
+    {
+      id: 4,
+      icon: <Power className="w-6 h-6 mx-auto text-muted" />,
+      label: formatTransmission(props.transmission),
+    },
+    {
+      id: 5,
+      icon: <Gauge className="w-6 h-6 mx-auto text-muted" />,
+      label: `${formatNumber(props.odoReading)} ${formatOdoUnit(
+        props.odoUnit,
+      )}`,
+    },
+    {
+      id: 6,
+      icon: <User className="w-6 h-6 mx-auto text-muted" />,
+      label: `${props.seats} seats`,
+    },
+    {
+      id: 7,
+      icon: <CarFront className="w-6 h-6 mx-auto text-muted" />,
+      label: `${props.doors} doors`,
+    },
+  ];
+};
 
 const SingleClassified = (props: ClassifiedWithImagesAndMake) => {
   return (
@@ -64,9 +117,19 @@ const SingleClassified = (props: ClassifiedWithImagesAndMake) => {
             </Link>
           </Button>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <div className="bg-slate-800 rounded-lg shadow-xs p-4 text-center">
-              hello there
-            </div>
+            {features(props).map(({ id, icon, label }) => {
+              return (
+                <div
+                  key={id}
+                  className="w-full bg-muted-foreground rounded-lg shadow-xs p-0 text-center flex-col justify-center items-center gap-0 py-2"
+                >
+                  <span className=" w-full flex justify-center items-end">
+                    {icon}
+                  </span>
+                  <p className="text-sm font-medium mt-1 text-muted">{label}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
