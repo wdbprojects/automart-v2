@@ -17,7 +17,7 @@ const SwiperButtons = (props: SwiperButtonProps) => {
         variant="outline"
         className={cn(
           prevClassName,
-          "absolute top-1/2 -translate-y-1/2 z-10 flex items-center rounded-full",
+          "swiper-button-prev absolute top-1/2 -translate-y-1/2 flex items-center rounded-full !z-[500]",
         )}
         onClick={(event) => {
           event.stopPropagation();
@@ -31,7 +31,7 @@ const SwiperButtons = (props: SwiperButtonProps) => {
         variant="outline"
         className={cn(
           nextClassName,
-          "absolute top-1/2 -translate-y-1/2 z-10 flex items-center rounded-full",
+          "swiper-button-next absolute top-1/2 -translate-y-1/2 flex items-center rounded-full !z-[500]",
         )}
         onClick={(event) => {
           event.stopPropagation();

@@ -34,6 +34,7 @@ const InventoryPage = async (props: PageProps) => {
     _min: { year: true, price: true, odoReading: true },
     _max: { year: true, price: true, odoReading: true },
   });
+
   return (
     <InventoryMain
       searchParams={searchParams ?? {}}

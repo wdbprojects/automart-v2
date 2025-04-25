@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: "vl.imgix.net",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "wdb-automart.imgix.net",
+        port: "",
+      },
     ],
   },
 };

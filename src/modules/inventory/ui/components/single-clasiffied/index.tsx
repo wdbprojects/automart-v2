@@ -1,5 +1,5 @@
 import { ClassifiedWithImagesAndMake, MultiStepFormEnum } from "@/config/types";
-import ClassifiedCarousel from "./carousel";
+import ClassifiedCarousel from "./classified-carousel";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import {

@@ -16,7 +16,7 @@ const ClassifiedPage = async (props: PageProps) => {
     where: {
       slug: slug,
     },
-    include: { make: true, images: { take: 1 } },
+    include: { make: true, images: true },
   });
   if (!classified) return notFound();
   if (classified.status === ClassifiedStatus.SOLD) {

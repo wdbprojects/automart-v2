@@ -2,8 +2,6 @@ import { ClassifiedWithImages, Favourites } from "@/config/types.js";
 import InventoryNavbar from "./components/inventory-navbar";
 import InventorySidebar from "./components/inventory-sidebar";
 import { CLASSIFIEDS_PER_PAGE } from "@/config/constants";
-import { prisma } from "@/lib/prisma";
-import { z } from "zod";
 import { getSourceId } from "@/lib/source-id";
 import { redis } from "@/lib/redis-store";
 import { Prisma } from "@prisma/client";
@@ -26,7 +24,6 @@ const InventoryMain = async ({
   const sourceId = await getSourceId();
   const favourites = await redis.get<Favourites>(sourceId ?? "");
   const totalPages = Math.ceil(count / CLASSIFIEDS_PER_PAGE);
-
   return (
     <div className="w-full">
       <InventoryNavbar />

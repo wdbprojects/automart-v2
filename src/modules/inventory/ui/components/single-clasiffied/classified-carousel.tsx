@@ -7,12 +7,13 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/virtual";
 import { EffectFade, Navigation, Thumbs, Virtual } from "swiper/modules";
-import { type Swiper as SwiperType } from "swiper";
+import type { Swiper as SwiperType } from "swiper";
 import dynamic from "next/dynamic";
 import { SwiperSlide } from "swiper/react";
-import Image from "next/image";
 import SwiperButtons from "./swiper-buttons";
 import CarouselSkeleton from "./carousel-skeleton";
+import { ImgixImage } from "@/components/ui/imgix-image";
+import { imgixLoader } from "@/lib/imgix-loader";
 
 interface ClassifiedCarouselProps {
   images: PrismaImage[];
@@ -24,6 +25,11 @@ const Swiper = dynamic(() => import("swiper/react").then((mod) => mod.Swiper), {
     return <CarouselSkeleton />;
   },
 });
+
+// const Swiper = dynamic(() => import("swiper/react").then((mod) => mod.Swiper), {
+//   ssr: false,
+//   loading: () => <CarouselSkeleton />,
+// });
 
 const SwiperThumb = dynamic(
   () => import("swiper/react").then((mod) => mod.Swiper),
@@ -57,7 +63,7 @@ const ClassifiedCarousel = ({ images }: ClassifiedCarouselProps) => {
   }, [lightboxController.toggler, activeIndex]);
 
   const sources = images.map((image) => {
-    return image.src;
+    return imgixLoader({ src: image.src, width: 2400, quality: 100 });
   });
 
   return (
@@ -77,7 +83,7 @@ const ClassifiedCarousel = ({ images }: ClassifiedCarouselProps) => {
           effect="fade"
           spaceBetween={10}
           fadeEffect={{ crossFade: true }}
-          //thumbs={{ swiper: thumbsSwiper }}
+          thumbs={{ swiper: thumbsSwiper }}
           modules={[EffectFade, Navigation, Thumbs, Virtual]}
           virtual={{ addSlidesAfter: 8, enabled: true }}
           className="aspect-3/2"
@@ -86,14 +92,15 @@ const ClassifiedCarousel = ({ images }: ClassifiedCarouselProps) => {
           {images.map((image, index) => {
             return (
               <SwiperSlide key={image.id} virtualIndex={index}>
-                <Image
+                <ImgixImage
                   blurDataURL={image.blurhash}
+                  placeholder="blur"
                   src={image.src}
                   alt={image.alt}
-                  width={1200}
-                  height={800}
-                  placeholder="blur"
-                  className="aspect-3/2 object-cover rounded-md cursor-pointer"
+                  width={620}
+                  height={400}
+                  quality={45}
+                  className="aspect-3/2 object-cover rounded-md"
                   onClick={handleImageClick}
                 />
               </SwiperSlide>
@@ -101,8 +108,8 @@ const ClassifiedCarousel = ({ images }: ClassifiedCarouselProps) => {
           })}
         </Swiper>
         <SwiperButtons
-          prevClassName="left-4 !bg-background/70 border-none"
-          nextClassName="right-4 !bg-background/70 border-none"
+          prevClassName="left-4 !bg-background/70 border-none cursor-pointer"
+          nextClassName="right-4 !bg-background/70 border-none cursor-pointer"
         />
       </div>
       <SwiperThumb
@@ -119,12 +126,13 @@ const ClassifiedCarousel = ({ images }: ClassifiedCarouselProps) => {
               key={image.id}
               className="relative mt-2 h-fit w-full cursor-grab"
             >
-              <Image
+              <ImgixImage
                 src={image.src}
                 alt={image.alt}
                 className="object-cover aspect-3/2 rounded-md"
-                width={300}
-                height={200}
+                width={150}
+                height={100}
+                quality={1}
                 placeholder="blur"
                 blurDataURL={image.blurhash}
               />

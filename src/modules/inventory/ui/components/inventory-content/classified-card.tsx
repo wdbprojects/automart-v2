@@ -8,11 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { routes } from "@/config/routes";
-import {
-  ClassifiedWithImages,
-  Favourites,
-  MultiStepFormEnum,
-} from "@/config/types";
+import { ClassifiedWithImages, MultiStepFormEnum } from "@/config/types";
 import { HTMLParser } from "@/components/shared/html-parser";
 import { Cog, Fuel, GaugeCircle, Paintbrush2 } from "lucide-react";
 import { Color, FuelType, OdoUnit, Transmission } from "@prisma/client";
@@ -25,6 +21,7 @@ import {
   formatPrice,
   formatTransmission,
 } from "@/lib/utils";
+import { ImgixImage } from "@/components/ui/imgix-image";
 
 interface ClassifiedCardProps {
   classified: ClassifiedWithImages;
@@ -83,7 +80,7 @@ export const ClassifiedCard = (props: ClassifiedCardProps) => {
           <Card className="w-full pt-0 pb-4 gap-2 rounded-md overflow-hidden flex flex-col justify-between space-y-2">
             <CardContent className="px-0 relative">
               <Link href={routes.singleClassified(classified.slug)}>
-                <Image
+                <ImgixImage
                   placeholder="blur"
                   blurDataURL={classified.images[0]?.blurhash}
                   src={classified.images[0]?.src}
