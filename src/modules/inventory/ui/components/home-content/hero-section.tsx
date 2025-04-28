@@ -25,7 +25,7 @@ const HeroSection = async ({ searchParams }: AwaitedPageProps) => {
 
   return (
     <section
-      className="relative flex items-start justify-center h-[calc(100vh-4rem)] bg-no-repeat bg-cover bg-center pt-24"
+      className="relative flex items-start justify-center h-auto pb-[6rem] bg-no-repeat bg-cover bg-center pt-24 px-2"
       style={{
         backgroundImage: `url(${imgixLoader({
           src: imagesSources.carLineup,
@@ -35,7 +35,7 @@ const HeroSection = async ({ searchParams }: AwaitedPageProps) => {
       }}
     >
       <div className="absolute inset-0 bg-[#020817] opacity-75"></div>
-      <div className="lg:grid space-y-12 items-start relative z-100">
+      <div className="lg:grid space-y-12 items-start relative z-10">
         <div className="px-10 lg:px-0">
           <h1 className="text-2xl text-center md:text-4xl lg:text-6xl uppercase text-white font-extrabold">
             Unbeatable deals on new <br /> & used cars
