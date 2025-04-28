@@ -5,7 +5,6 @@ import { prisma } from "@/lib/prisma";
 import { buildClassifiedFilterQuery } from "@/lib/utils";
 import InventoryMain from "@/modules/inventory/ui/inventory-main";
 import { ClassifiedStatus, Prisma } from "@prisma/client";
-import { z } from "zod";
 
 /* //FUNC: fetch classifieds based on filters  */
 
@@ -26,6 +25,7 @@ const getInventory = async (searchParams: AwaitedPageProps["searchParams"]) => {
 const InventoryPage = async (props: PageProps) => {
   const searchParams = await props.searchParams;
   const classifieds = getInventory(searchParams);
+
   const count = await prisma.classified.count({
     where: buildClassifiedFilterQuery(searchParams),
   });

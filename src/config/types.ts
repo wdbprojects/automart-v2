@@ -25,6 +25,13 @@ export enum MultiStepFormEnum {
   SUBMIT_DETAILS = 3,
 }
 
+export interface SidebarProps extends AwaitedPageProps {
+  minMaxValues: Prisma.GetClassifiedAggregateType<{
+    _min: { year: true; price: true; odoReading: true };
+    _max: { year: true; price: true; odoReading: true };
+  }>;
+}
+
 export interface Favourites {
   ids: number[];
 }
