@@ -15,6 +15,12 @@ export type AwaitedPageProps = {
   searchParams?: Awaited<PageProps["searchParams"]>;
 };
 
+export interface MultiStepFormComponentProps extends AwaitedPageProps {
+  classified: Prisma.ClassifiedGetPayload<{
+    include: { make: true };
+  }>;
+}
+
 export type ClassifiedWithImages = Prisma.ClassifiedGetPayload<{
   include: { images: true };
 }>;

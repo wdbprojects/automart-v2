@@ -28,9 +28,11 @@ const SelectComp = (props: SelectProps) => {
   return (
     <div className={cn("mt-1 flex-1 w-full", className)}>
       {label && (
-        <h4 className="text-sm font-medium text-muted-foreground">{label}</h4>
+        <h4 className="text-sm font-medium text-muted-foreground !mb-0">
+          {label}
+        </h4>
       )}
-      <div className="mt-1 relative">
+      <div className="relative">
         <select
           onChange={onChange}
           value={value ?? ""}
