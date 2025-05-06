@@ -108,7 +108,7 @@ const InventoryNavbar = async () => {
             <Link href="/inventory">Inventory</Link>
           </Button>
           <Button size="sm" className="cursor-pointer" asChild>
-            <Link href={""}>Sign in</Link>
+            <Link href={routes.signIn}>Sign in</Link>
           </Button>
         </div>
         <div className="flex-shrink-0">
