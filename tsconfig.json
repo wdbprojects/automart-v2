@@ -21,10 +21,12 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/env": ["./env.mjs"]
+      "@/env": ["./env.mjs"],
+      "@/auth": ["./auth"]
     }
   },
   "include": [
+    "next-auth.d.ts",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

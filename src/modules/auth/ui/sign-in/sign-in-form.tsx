@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { loginSchema } from "@/app/schemas/auth.schema";
+import { SignInSchema } from "@/app/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -22,19 +22,19 @@ import { LoaderCircle } from "lucide-react";
 import FormButtons from "@/components/shared/form-buttons";
 import DialogSuccess from "@/components/shared/dialog-success";
 import DialogError from "@/components/shared/dialog-error";
+import { signInAction } from "@/app/_actions/sign-in";
 
 const SignInForm = () => {
-  const [state, formAction] = useActionState(null, {
+  const [state, formAction] = useActionState(signInAction, {
     success: false,
     message: "",
   });
-  const [error, setError] = useState<string | undefined>("");
 
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
 
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof SignInSchema>>({
+    resolver: zodResolver(SignInSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -42,16 +42,12 @@ const SignInForm = () => {
     mode: "onBlur",
   });
 
-  const { handleSubmit, control, reset } = form;
-
-  const onSubmit = (values: z.infer<typeof loginSchema>) => {
-    console.log(values);
-  };
+  const { control, reset } = form;
 
   useEffect(() => {
     if (state?.success && formRef.current) {
       router.refresh();
-      router.push("/auth/challenge");
+      // router.push("/auth/challenge");
     }
   }, [state, router]);
 
@@ -62,12 +58,7 @@ const SignInForm = () => {
       backButtonHref="/auth/register"
     >
       <Form {...form}>
-        <form
-          ref={formRef}
-          action={formAction}
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4"
-        >
+        <form ref={formRef} action={formAction} className="space-y-4">
           <FormField
             control={control}
             name="email"

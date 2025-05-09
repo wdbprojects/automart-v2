@@ -10,3 +10,5 @@ export const endpoints = {
   favourites: "/api/favourites",
   taxonomy: "/api/taxonomy",
 };
+
+export const SESSION_MAX_AGE = 7 * 24 * 60 * 60 * 1000;

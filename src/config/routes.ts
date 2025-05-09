@@ -18,6 +18,7 @@ export const routes = {
     return `/inventory/${slug}/not-available`;
   },
   signIn: "/auth/sign-in",
+  signOut: "/auth/sign-out",
   challenge: "/auth/challenge",
   signUp: "/auth/sign-up",
 };
